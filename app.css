@@ -1,17 +1,30 @@
-﻿.btn-primary {
-    background-color: #6699ff;
-    padding: 5px;
-    -ms-border-radius: 0;
-    border-radius: 0;
+﻿h1 {
+    font-size: 20px;
 }
 
 .controls {
     padding: 15px;
 }
 
-h1 {
-    font-size: 20px;
-}
+    .controls button {
+        background-color: #6699ff;
+        border-color: #6699ff;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        font-size: small;
+        -ms-border-radius: 0;
+        border-radius: 0;
+        -ms-opacity: 1;
+        opacity: 1;
+    }
+
+        .controls button:hover {
+            background-color: #6699ff;
+            border-color: #6699ff;
+            -ms-opacity: 0.9;
+            opacity: 0.9;
+        }
 
 .container {
     background-color: #F5F5F5;
@@ -22,10 +35,15 @@ h1 {
 .mailBlocks {
     background-color: #FFFFFF;
     display: inline-block;
+    -webkit-box-shadow: 0 1px 0 0 #CCCCCC inset;
+    -ms-box-shadow: 0 1px 0 0 #CCCCCC inset;
+    box-shadow: 0 1px 0 0 #CCCCCC inset;
 }
 
     .mailBlocks div {
         display: inline-block;
+        margin: 5px 5px 0 0;
+        padding: 2px 5px;
     }
 
 input {
@@ -41,8 +59,11 @@ input {
     background-color: #D9E8FF;
     -ms-border-radius: 10px;
     border-radius: 10px;
-    padding: 5px;
 }
+
+    .bubble button:focus {
+        outline: none;
+    }
 
     .bubble > span {
         margin-right: 5px;
