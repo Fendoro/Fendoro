@@ -34,7 +34,7 @@ var EmailsEditor;
             },
             set: function (value) {
                 this._email = value;
-                this._isCorrect = EmailsEditor.Helper.checkemail(value);
+                this._isCorrect = EmailsEditor.Helper.checkEmail(value);
             },
             enumerable: true,
             configurable: true
@@ -62,7 +62,7 @@ var EmailsEditor;
         function EmailsEditorCtrl($scope, service) {
             this.$scope = $scope;
             this.service = service;
-            $scope.title = "emailsEditorCtrl";
+            $scope.title = "";
             $scope.emails = service.getEmails();
             $scope.frmData = {
                 inEmail: ""
@@ -120,6 +120,9 @@ var EmailsEditor;
             this.restrict = "E";
             this.templateUrl = "EmailsEditor\\DirectievesTemplates\\EmailsEditorDirectiveTemplate.html";
             this.controller = "emailsEditorCtrl";
+            this.scope = {
+                title: "@myTitle"
+            };
         }
         EmailsEditorDirective.prototype.link = function (scope, element, attrs) {
         };
@@ -180,7 +183,7 @@ var EmailsEditor;
     var Helper = (function () {
         function Helper() {
         }
-        Helper.checkemail = function (email) {
+        Helper.checkEmail = function (email) {
             return this._emailRegex.test(email);
         };
         Helper._emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;

@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html lang="en" ng-app="app">
+<html lang="en" >
 <head>
     <meta charset="utf-8" />
     <title>TypeScript HTML App</title>
@@ -10,12 +10,12 @@
     <script src="app.js"></script>
 </head>
 <body>
-    <div ng-controller="mainCtrl as mctrl">
-        <emails-editor></emails-editor>
-        <div class="controls">
-            <button ng-click="mctrl.addEmails()">Add random email</button>
-            <button ng-click="mctrl.getEmailsCount()">Get emails count</button>
-        </div>
+<div ng-app="app" ng-controller="mainCtrl as mctrl">
+    <emails-editor my-title="Board Name"></emails-editor>
+    <div class="controls">
+        <button ng-click="mctrl.addEmails()">Add random email</button>
+        <button ng-click="mctrl.getEmailsCount()">Get emails count</button>
     </div>
+</div>
 </body>
 </html>
