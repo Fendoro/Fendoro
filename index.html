@@ -1,21 +1,20 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en" >
+<html lang="en" ng-app="app">
 <head>
     <meta charset="utf-8" />
     <title>TypeScript HTML App</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="app.css" type="text/css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
     <script src="app.js"></script>
 </head>
 <body>
-<div ng-app="app" ng-controller="mainCtrl as mctrl">
-    <emails-editor my-title="Board Name"></emails-editor>
-    <div class="controls">
-        <button ng-click="mctrl.addEmails()">Add random email</button>
-        <button ng-click="mctrl.getEmailsCount()">Get emails count</button>
+    <div ng-controller="mainCtrl as mctrl">
+        <emails-editor header="Board Name" email-container="mctrl.emailContainer"></emails-editor>
+        <div class="controls">
+            <button ng-click="mctrl.addEmails()">Add random email</button>
+            <button ng-click="mctrl.getEmailsCount()">Get emails count</button>
+        </div>
     </div>
-</div>
 </body>
 </html>

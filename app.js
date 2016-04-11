@@ -1,27 +1,5 @@
 angular.module("emails-editor", []);
 angular.module("app", ["emails-editor"]);
-var App;
-(function (App) {
-    "use strict";
-    var MainCtrl = (function () {
-        function MainCtrl($scope, service) {
-            this.$scope = $scope;
-            this.service = service;
-            $scope.title = "MainCtrl";
-            $scope.controller = this;
-        }
-        MainCtrl.prototype.getEmailsCount = function () {
-            alert(this.service.getEmails().length);
-        };
-        MainCtrl.prototype.addEmails = function () {
-            this.service.generateEmail();
-        };
-        MainCtrl.id = "mainCtrl";
-        MainCtrl.$inject = ["$scope", "emailsEditorService"];
-        return MainCtrl;
-    }());
-    angular.module("app").controller("mainCtrl", MainCtrl);
-})(App || (App = {}));
 var EmailsEditor;
 (function (EmailsEditor) {
     var Email = (function () {
@@ -52,6 +30,43 @@ var EmailsEditor;
 })(EmailsEditor || (EmailsEditor = {}));
 var EmailsEditor;
 (function (EmailsEditor) {
+    var EmailContainer = (function () {
+        function EmailContainer() {
+            this._emails = [];
+        }
+        Object.defineProperty(EmailContainer.prototype, "emails", {
+            get: function () {
+                return this._emails;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        EmailContainer.prototype.findemail = function (email) {
+            for (var i = 0, len = this._emails.length; i < len; i++) {
+                if (this._emails[i].email === email) {
+                    return i;
+                }
+            }
+            return -1;
+        };
+        EmailContainer.prototype.addEmail = function (email) {
+            var index = this.findemail(email);
+            if (index === -1) {
+                this._emails.push(new EmailsEditor.Email(email));
+            }
+        };
+        EmailContainer.prototype.deleteEmail = function (email) {
+            var index = this.findemail(email);
+            if (index > -1) {
+                this._emails.splice(index, 1);
+            }
+        };
+        return EmailContainer;
+    }());
+    EmailsEditor.EmailContainer = EmailContainer;
+})(EmailsEditor || (EmailsEditor = {}));
+var EmailsEditor;
+(function (EmailsEditor) {
     "use strict";
     var KeyCodes;
     (function (KeyCodes) {
@@ -59,25 +74,36 @@ var EmailsEditor;
         KeyCodes[KeyCodes["Comma"] = 44] = "Comma";
     })(KeyCodes || (KeyCodes = {}));
     var EmailsEditorCtrl = (function () {
-        function EmailsEditorCtrl($scope, service) {
+        function EmailsEditorCtrl($scope) {
             this.$scope = $scope;
-            this.service = service;
-            $scope.title = "";
-            $scope.emails = service.getEmails();
             $scope.frmData = {
                 inEmail: ""
             };
             $scope.controller = this;
         }
+        Object.defineProperty(EmailsEditorCtrl.prototype, "emailContainer", {
+            get: function () {
+                return this.$scope.emailContainer;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(EmailsEditorCtrl.prototype, "emails", {
             get: function () {
-                return this.$scope.emails;
+                return this.emailContainer.emails;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(EmailsEditorCtrl.prototype, "hasEmails", {
+            get: function () {
+                return this.emails ? this.emails.length > 0 : false;
             },
             enumerable: true,
             configurable: true
         });
         EmailsEditorCtrl.prototype.deleteEmail = function (email) {
-            this.service.deleteEmail(email);
+            this.emailContainer.deleteEmail(email);
         };
         EmailsEditorCtrl.prototype.keyPressHandler = function (event) {
             switch (event.keyCode) {
@@ -101,27 +127,51 @@ var EmailsEditor;
         };
         EmailsEditorCtrl.prototype.addEmail = function (email) {
             if (email) {
-                this.service.addEmail(email);
+                this.emailContainer.addEmail(email);
             }
             this.$scope.frmData.inEmail = "";
         };
         EmailsEditorCtrl.id = "emailsEditorCtrl";
-        EmailsEditorCtrl.$inject = ["$scope", "emailsEditorService"];
+        EmailsEditorCtrl.$inject = ["$scope"];
         return EmailsEditorCtrl;
     }());
     EmailsEditor.EmailsEditorCtrl = EmailsEditorCtrl;
     angular.module("emails-editor").controller("emailsEditorCtrl", EmailsEditorCtrl);
 })(EmailsEditor || (EmailsEditor = {}));
+var App;
+(function (App) {
+    "use strict";
+    var MainCtrl = (function () {
+        function MainCtrl($scope, service) {
+            this.$scope = $scope;
+            this.service = service;
+            this.emailContainer = new EmailsEditor.EmailContainer();
+        }
+        MainCtrl.prototype.getEmailsCount = function () {
+            alert(this.emailContainer.emails.length);
+        };
+        MainCtrl.prototype.addEmails = function () {
+            this.service.generateEmail(this.emailContainer);
+        };
+        MainCtrl.id = "mainCtrl";
+        MainCtrl.$inject = ["$scope", "generateEmailsService"];
+        return MainCtrl;
+    }());
+    angular.module("app").controller("mainCtrl", MainCtrl);
+})(App || (App = {}));
 var EmailsEditor;
 (function (EmailsEditor) {
     "use strict";
     var EmailsEditorDirective = (function () {
         function EmailsEditorDirective() {
+            this.transclude = true;
+            this.replace = true;
             this.restrict = "E";
             this.templateUrl = "EmailsEditor\\DirectievesTemplates\\EmailsEditorDirectiveTemplate.html";
             this.controller = "emailsEditorCtrl";
             this.scope = {
-                title: "@myTitle"
+                title: "@header",
+                emailContainer: "="
             };
         }
         EmailsEditorDirective.prototype.link = function (scope, element, attrs) {
@@ -134,50 +184,25 @@ var EmailsEditor;
     }());
     angular.module("emails-editor").directive("emailsEditor", EmailsEditorDirective.instance);
 })(EmailsEditor || (EmailsEditor = {}));
-var EmailsEditor;
-(function (EmailsEditor) {
+var App;
+(function (App) {
     "use strict";
-    var EmailsEditorService = (function () {
-        function EmailsEditorService($http) {
+    var GenerateEmailsService = (function () {
+        function GenerateEmailsService($http) {
             this.$http = $http;
-            this._emails = [];
         }
-        EmailsEditorService.prototype.getEmails = function () {
-            return this._emails;
-        };
-        EmailsEditorService.prototype.findemail = function (email) {
-            for (var i = 0, len = this._emails.length; i < len; i++) {
-                if (this._emails[i].email === email) {
-                    return i;
-                }
-            }
-            return -1;
-        };
-        EmailsEditorService.prototype.addEmail = function (email) {
-            var index = this.findemail(email);
-            if (index === -1) {
-                this._emails.push(new EmailsEditor.Email(email));
-            }
-        };
-        EmailsEditorService.prototype.deleteEmail = function (email) {
-            var index = this.findemail(email);
-            if (index > -1) {
-                this._emails.splice(index, 1);
-            }
-        };
-        EmailsEditorService.prototype.generateEmail = function () {
-            var _this = this;
+        GenerateEmailsService.prototype.generateEmail = function (container) {
             this.$http.get("https://randomuser.me/api/", { responseType: "json" }).success(function (data) {
-                _this.addEmail(data.results[0].email);
+                container.addEmail(data.results[0].email);
             });
         };
-        EmailsEditorService.id = "emailsEditorService";
-        EmailsEditorService.$inject = ["$http"];
-        return EmailsEditorService;
+        GenerateEmailsService.id = "emailsEditorService";
+        GenerateEmailsService.$inject = ["$http"];
+        return GenerateEmailsService;
     }());
-    EmailsEditor.EmailsEditorService = EmailsEditorService;
-    angular.module("emails-editor").service("emailsEditorService", EmailsEditorService);
-})(EmailsEditor || (EmailsEditor = {}));
+    App.GenerateEmailsService = GenerateEmailsService;
+    angular.module("app").service("generateEmailsService", GenerateEmailsService);
+})(App || (App = {}));
 var EmailsEditor;
 (function (EmailsEditor) {
     var Helper = (function () {
@@ -191,4 +216,3 @@ var EmailsEditor;
     }());
     EmailsEditor.Helper = Helper;
 })(EmailsEditor || (EmailsEditor = {}));
-//# sourceMappingURL=app.js.map
