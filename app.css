@@ -1,9 +1,5 @@
-﻿h1 {
-    font-size: 20px;
-}
-
-.controls {
-    padding: 15px;
+﻿.controls {
+    padding: 40px;
 }
 
     .controls button {
@@ -17,6 +13,8 @@
         border-radius: 0;
         -ms-opacity: 1;
         opacity: 1;
+        margin-right: 20px;
+        height: 30px;
     }
 
         .controls button:hover {
@@ -27,33 +25,54 @@
         }
 
 .container {
-    background-color: #F5F5F5;
-    padding: 20px;
-    display: inline-block;
+    -moz-min-width: 500px;
+    -ms-min-width: 500px;
+    -o-min-width: 500px;
+    -webkit-min-width: 500px;
+    width: 500px;
+    height: 320px;
+    min-width: 500px;
+    min-height: 320px;
 }
 
-.mailBlocks {
-    background-color: #FFFFFF;
+.mailEditor {
+    background-color: #F5F5F5;
+    padding: 35px 40px 30px 40px;
     display: inline-block;
+    width: calc(100% - 80px);
+}
+
+    .mailEditor > h1 {
+        font-size: 20px;
+        margin: 0;
+        margin-bottom: 40px;
+        font-weight: lighter;
+    }
+
+.mailBlocks {
+    overflow: auto;
+    background-color: #FFFFFF;
     -webkit-box-shadow: 0 1px 0 0 #CCCCCC inset;
     -ms-box-shadow: 0 1px 0 0 #CCCCCC inset;
     box-shadow: 0 1px 0 0 #CCCCCC inset;
+    padding: 10px;
+    height: 100px;
 }
 
     .mailBlocks div {
         display: inline-block;
-        margin: 5px 5px 0 0;
+        margin: 0 5px 5px 0;
         padding: 2px 5px;
     }
 
-input {
-    border: none;
-    width: 100%;
-}
-
-    input:focus {
-        outline: none;
+    .mailBlocks input {
+        border: none;
+        width: 100%;
     }
+
+        .mailBlocks input:focus {
+            outline: none;
+        }
 
 .bubble {
     background-color: #D9E8FF;
@@ -73,10 +92,29 @@ input {
             border-bottom: 1px solid red;
         }
 
-.resize {
-    -moz-resize: both;
-    -ms-resize: both;
-    -o-resize: both;
-    resize: both;
-    overflow: auto;
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+
+    .close:focus, .close:hover {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        filter: alpha(opacity=50);
+        opacity: .5;
+    }
+
+button.close {
+    -webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
 }
