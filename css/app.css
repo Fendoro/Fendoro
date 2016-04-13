@@ -1,0 +1,36 @@
+﻿.controls {
+    padding: 40px;
+}
+
+    .controls button {
+        background-color: #6699ff;
+        border-color: #6699ff;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        font-size: small;
+        -ms-border-radius: 0;
+        border-radius: 0;
+        -ms-opacity: 1;
+        opacity: 1;
+        margin-right: 20px;
+        height: 30px;
+    }
+
+        .controls button:hover {
+            background-color: #6699ff;
+            border-color: #6699ff;
+            -ms-opacity: 0.9;
+            opacity: 0.9;
+        }
+
+.container {
+    -moz-min-width: 500px;
+    -ms-min-width: 500px;
+    -o-min-width: 500px;
+    -webkit-min-width: 500px;
+    width: 500px;
+    height: 320px;
+    min-width: 500px;
+    min-height: 320px;
+}

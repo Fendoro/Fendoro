@@ -1,5 +1,26 @@
 angular.module("emails-editor", []);
 angular.module("app", ["emails-editor"]);
+var App;
+(function (App) {
+    "use strict";
+    var MainCtrl = (function () {
+        function MainCtrl($scope, service) {
+            this.$scope = $scope;
+            this.service = service;
+            this.emailContainer = new EmailsEditor.EmailContainer();
+        }
+        MainCtrl.prototype.getEmailsCount = function () {
+            alert(this.emailContainer.emails.length);
+        };
+        MainCtrl.prototype.addEmails = function () {
+            this.service.generateEmail(this.emailContainer);
+        };
+        MainCtrl.id = "mainCtrl";
+        MainCtrl.$inject = ["$scope", "generateEmailsService"];
+        return MainCtrl;
+    }());
+    angular.module("app").controller("mainCtrl", MainCtrl);
+})(App || (App = {}));
 var EmailsEditor;
 (function (EmailsEditor) {
     var Email = (function () {
@@ -138,27 +159,6 @@ var EmailsEditor;
     EmailsEditor.EmailsEditorCtrl = EmailsEditorCtrl;
     angular.module("emails-editor").controller("emailsEditorCtrl", EmailsEditorCtrl);
 })(EmailsEditor || (EmailsEditor = {}));
-var App;
-(function (App) {
-    "use strict";
-    var MainCtrl = (function () {
-        function MainCtrl($scope, service) {
-            this.$scope = $scope;
-            this.service = service;
-            this.emailContainer = new EmailsEditor.EmailContainer();
-        }
-        MainCtrl.prototype.getEmailsCount = function () {
-            alert(this.emailContainer.emails.length);
-        };
-        MainCtrl.prototype.addEmails = function () {
-            this.service.generateEmail(this.emailContainer);
-        };
-        MainCtrl.id = "mainCtrl";
-        MainCtrl.$inject = ["$scope", "generateEmailsService"];
-        return MainCtrl;
-    }());
-    angular.module("app").controller("mainCtrl", MainCtrl);
-})(App || (App = {}));
 var EmailsEditor;
 (function (EmailsEditor) {
     "use strict";
@@ -167,7 +167,7 @@ var EmailsEditor;
             this.transclude = true;
             this.replace = true;
             this.restrict = "E";
-            this.templateUrl = "EmailsEditor\\DirectievesTemplates\\EmailsEditorDirectiveTemplate.html";
+            this.templateUrl = "app\\emails-editor\\emails-editor.html";
             this.controller = "emailsEditorCtrl";
             this.scope = {
                 title: "@header",
@@ -183,6 +183,19 @@ var EmailsEditor;
         return EmailsEditorDirective;
     }());
     angular.module("emails-editor").directive("emailsEditor", EmailsEditorDirective.instance);
+})(EmailsEditor || (EmailsEditor = {}));
+var EmailsEditor;
+(function (EmailsEditor) {
+    var Helper = (function () {
+        function Helper() {
+        }
+        Helper.checkEmail = function (email) {
+            return this._emailRegex.test(email);
+        };
+        Helper._emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return Helper;
+    }());
+    EmailsEditor.Helper = Helper;
 })(EmailsEditor || (EmailsEditor = {}));
 var App;
 (function (App) {
@@ -203,17 +216,4 @@ var App;
     App.GenerateEmailsService = GenerateEmailsService;
     angular.module("app").service("generateEmailsService", GenerateEmailsService);
 })(App || (App = {}));
-var EmailsEditor;
-(function (EmailsEditor) {
-    var Helper = (function () {
-        function Helper() {
-        }
-        Helper.checkEmail = function (email) {
-            return this._emailRegex.test(email);
-        };
-        Helper._emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        return Helper;
-    }());
-    EmailsEditor.Helper = Helper;
-})(EmailsEditor || (EmailsEditor = {}));
 //# sourceMappingURL=app.js.map

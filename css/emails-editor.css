@@ -1,97 +1,60 @@
-﻿.controls {
-    padding: 40px;
-}
-
-    .controls button {
-        background-color: #6699ff;
-        border-color: #6699ff;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        font-size: small;
-        -ms-border-radius: 0;
-        border-radius: 0;
-        -ms-opacity: 1;
-        opacity: 1;
-        margin-right: 20px;
-        height: 30px;
-    }
-
-        .controls button:hover {
-            background-color: #6699ff;
-            border-color: #6699ff;
-            -ms-opacity: 0.9;
-            opacity: 0.9;
-        }
-
-.container {
-    -moz-min-width: 500px;
-    -ms-min-width: 500px;
-    -o-min-width: 500px;
-    -webkit-min-width: 500px;
-    width: 500px;
-    height: 320px;
-    min-width: 500px;
-    min-height: 320px;
-}
-
-.mailEditor {
+﻿.emails-editor {
     background-color: #F5F5F5;
     padding: 35px 40px 30px 40px;
     display: inline-block;
     width: calc(100% - 80px);
 }
 
-    .mailEditor > h1 {
+    .emails-editor > h1 {
         font-size: 20px;
         margin: 0;
         margin-bottom: 40px;
         font-weight: lighter;
     }
 
-.mailBlocks {
+.emails-editor-blocks {
     overflow: auto;
     background-color: #FFFFFF;
     -webkit-box-shadow: 0 1px 0 0 #CCCCCC inset;
     -ms-box-shadow: 0 1px 0 0 #CCCCCC inset;
     box-shadow: 0 1px 0 0 #CCCCCC inset;
-    padding: 10px;
+    padding: 10px 5px 5px 10px;
     height: 100px;
 }
 
-    .mailBlocks div {
+    .emails-editor-blocks div {
         display: inline-block;
         margin: 0 5px 5px 0;
         padding: 2px 5px;
     }
 
-    .mailBlocks input {
+    .emails-editor-blocks input {
         border: none;
     }
 
-        .mailBlocks input:focus {
+        .emails-editor-blocks input:focus {
             outline: none;
         }
 
-.bubble {
+.emails-editor-bubble {
     background-color: #D9E8FF;
     -ms-border-radius: 10px;
     border-radius: 10px;
 }
 
-    .bubble button:focus {
+    .emails-editor-bubble button:focus {
         outline: none;
     }
 
-    .bubble > span {
+    .emails-editor-bubble > span {
         margin-right: 5px;
     }
 
-        .bubble > span.underline {
+        .emails-editor-bubble > span.underline {
             border-bottom: 1px solid red;
         }
 
-.close {
+.emails-editor-close {
     float: right;
     font-size: 21px;
     font-weight: 700;
@@ -102,7 +65,7 @@
     opacity: .2;
 }
 
-    .close:focus, .close:hover {
+    .emails-editor-close:focus, .emails-editor-close:hover {
         color: #000;
         text-decoration: none;
         cursor: pointer;
@@ -110,7 +73,7 @@
         opacity: .5;
     }
 
-button.close {
+button.emails-editor-close {
     -webkit-appearance: none;
     padding: 0;
     cursor: pointer;

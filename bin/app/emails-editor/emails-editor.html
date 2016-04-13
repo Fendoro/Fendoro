@@ -1,9 +1,9 @@
-﻿<div class="mailEditor">
+﻿<div class="emails-editor">
     <h1>Share "{{title}}" with others</h1>
-    <div class="mailBlocks">
-        <div class="bubble" ng-repeat="email in controller.emails">
+    <div class="emails-editor-blocks">
+        <div class="emails-editor-bubble" ng-repeat="email in controller.emails">
             <span ng-class="{underline:!email.isCorrect}">{{email.email}}</span>
-            <button type="button" class="close" aria-label="Close" ng-click="controller.deleteEmail(email.email)">
+            <button type="button" class="emails-editor-close" aria-label="Close" ng-click="controller.deleteEmail(email.email)">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
