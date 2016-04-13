@@ -1,5 +1,9 @@
-﻿.emails-controls {
-    padding: 40px;
+﻿* {
+    margin: 0;
+}
+
+.emails-controls {
+    padding: 30px 40px;
 }
 
     .emails-controls button {
