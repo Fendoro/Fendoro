@@ -38,6 +38,7 @@ h1 {
 }
 
 .mailBlocks {
+    overflow: auto;
     background-color: #FFFFFF;
     display: inline-block;
     -webkit-box-shadow: 0 1px 0 0 #CCCCCC inset;
