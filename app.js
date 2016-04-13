@@ -167,7 +167,7 @@ var EmailsEditor;
             this.transclude = true;
             this.replace = true;
             this.restrict = "E";
-            this.templateUrl = "app//emails-editor//emails-editor.html";
+            this.templateUrl = "app/emails-editor/emails-editor.html";
             this.controller = "emailsEditorCtrl";
             this.scope = {
                 title: "@header",
