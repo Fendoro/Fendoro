@@ -1,13 +1,4 @@
-<<<<<<< HEAD
 ﻿.controls {
-=======
-h1 {
-    font-size: 20px;
-    margin: 0;
-}
-
-.controls {
->>>>>>> origin/master
     padding: 40px;
 }
 
@@ -23,10 +14,7 @@ h1 {
         -ms-opacity: 1;
         opacity: 1;
         margin-right: 20px;
-<<<<<<< HEAD
         height: 30px;
-=======
->>>>>>> origin/master
     }
 
         .controls button:hover {
@@ -51,13 +39,7 @@ h1 {
     background-color: #F5F5F5;
     padding: 35px 40px 30px 40px;
     display: inline-block;
-<<<<<<< HEAD
     width: calc(100% - 80px);
-=======
-    width: 500px;
-    height: 220px;
-    max-height: 220px;
->>>>>>> origin/master
 }
 
     .mailEditor > h1 {
@@ -73,15 +55,8 @@ h1 {
     -webkit-box-shadow: 0 1px 0 0 #CCCCCC inset;
     -ms-box-shadow: 0 1px 0 0 #CCCCCC inset;
     box-shadow: 0 1px 0 0 #CCCCCC inset;
-<<<<<<< HEAD
     padding: 10px;
     height: 100px;
-=======
-    height: 100px;
-    width: 425px;
-    margin-top: 40px;
-    padding: 10px;
->>>>>>> origin/master
 }
 
     .mailBlocks div {
