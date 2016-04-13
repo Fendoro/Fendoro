@@ -9,11 +9,11 @@
     <script src="app.js"></script>
 </head>
 <body>
-    <div class="container" ng-controller="mainCtrl as mctrl">
-        <emails-editor header="Board Name" email-container="mctrl.emailContainer"></emails-editor>
-        <div class="controls">
-            <button ng-click="mctrl.addEmails()">Add random email</button>
-            <button ng-click="mctrl.getEmailsCount()">Get emails count</button>
+    <div class="emails-container" ng-controller="emailsCtrl as ctrl">
+        <emails-editor header="Board Name" emails-container="ctrl.emailContainer"></emails-editor>
+        <div class="emails-controls">
+            <button ng-click="ctrl.addEmails()">Add random email</button>
+            <button ng-click="ctrl.getEmailsCount()">Get emails count</button>
         </div>
     </div>
 </body>
