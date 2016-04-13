@@ -1,6 +1,6 @@
 ﻿<div class="container">
     <h1>Share "{{title}}" with others</h1>
-    <div class="mailBlocks resize">
+    <div class="mailBlocks">
         <div class="bubble" ng-repeat="email in controller.emails">
             <span ng-class="{underline:!email.isCorrect}">{{email.email}}</span>
             <button type="button" class="close" aria-label="Close" ng-click="controller.deleteEmail(email.email)">
