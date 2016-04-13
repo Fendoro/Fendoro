@@ -1,9 +1,10 @@
-﻿h1 {
+h1 {
     font-size: 20px;
+    margin: 0;
 }
 
 .controls {
-    padding: 15px;
+    padding: 40px;
 }
 
     .controls button {
@@ -17,6 +18,7 @@
         border-radius: 0;
         -ms-opacity: 1;
         opacity: 1;
+        margin-right: 20px;
     }
 
         .controls button:hover {
@@ -28,8 +30,11 @@
 
 .container {
     background-color: #F5F5F5;
-    padding: 20px;
+    padding: 35px 40px 30px 40px;
     display: inline-block;
+    width: 500px;
+    height: 220px;
+    max-height: 220px;
 }
 
 .mailBlocks {
@@ -38,11 +43,15 @@
     -webkit-box-shadow: 0 1px 0 0 #CCCCCC inset;
     -ms-box-shadow: 0 1px 0 0 #CCCCCC inset;
     box-shadow: 0 1px 0 0 #CCCCCC inset;
+    height: 100px;
+    width: 425px;
+    margin-top: 40px;
+    padding: 10px;
 }
 
     .mailBlocks div {
         display: inline-block;
-        margin: 5px 5px 0 0;
+        margin: 0 5px 5px 0;
         padding: 2px 5px;
     }
 
